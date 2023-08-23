@@ -2,10 +2,10 @@
   <q-card class="post-card q-ma-sm">
     <q-img :src="post.thumbnailImgPath" class="thumbnail-img"></q-img>
 
-    <q-card-section class="column q-pb-none" style="height: 175px">
+    <q-card-section class="column q-pb-none" style="height: 200px">
       <div class="col text-weight-bold title-area">{{ post.title }}</div>
-      <div class="col-8 content-area">{{ post.explnCntnt ? post.explnCntnt : post.content }}</div>
-      <div class="col text-caption text-grey">{{ post.regDttm }} · 0개의 댓글</div>
+      <div class="col-7 content-area">{{ post.explnCntnt ? post.explnCntnt : post.content }}</div>
+      <div class="col text-caption text-grey q-pt-sm">{{ post.regDttm }} · 0개의 댓글</div>
     </q-card-section>
     <q-separator></q-separator>
     <q-card-section class="row items-center justify-between">
