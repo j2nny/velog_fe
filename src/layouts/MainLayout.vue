@@ -1,8 +1,13 @@
 <template>
-  <div :class="{'q-mx-lg q-my-lg': browserSize < 600, 'q-mx-xl q-my-lg': browserSize >= 600}">
-    <Header></Header>
-    <router-view></router-view>
-  </div>
+      <q-layout view="hHh LpR fFf">
+        <Header/>
+        <q-page-container>
+          <router-view
+            :class="{'q-mx-lg': browserSize < 600, 'q-mx-xl': browserSize >= 600}"
+          ></router-view>
+        </q-page-container>
+      </q-layout>
+
 </template>
 
 <script setup>
@@ -17,5 +22,4 @@ const handleBrowserSize = () => {
 onMounted(() => {
   window.addEventListener('resize', handleBrowserSize)
 })
-
 </script>
