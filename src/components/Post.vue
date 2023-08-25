@@ -1,5 +1,5 @@
 <template>
-  <q-card class="post-card q-ma-sm">
+  <q-card class="post-card q-ma-sm cursor-pointer" @click="$router.push('/'+post.regUserId+'/'+post.postNo)">
     <q-img :src="post.thumbnailImgPath" class="thumbnail-img"></q-img>
 
     <q-card-section class="column q-pb-none" style="height: 200px">
@@ -52,5 +52,14 @@ defineProps({
   -webkit-box-orient: vertical;
   display: -webkit-box;
   -webkit-line-clamp: 5;
+}
+
+.post-card{
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.post-card:hover{
+  transform: translateY(-7px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 </style>
