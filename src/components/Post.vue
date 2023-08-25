@@ -8,7 +8,7 @@
       <div class="col text-caption text-grey q-pt-sm">{{ post.regDttm }} · 0개의 댓글</div>
     </q-card-section>
     <q-separator></q-separator>
-    <q-card-section class="row items-center justify-between">
+    <q-card-section class="row items-center justify-between q-py-sm">
       <div>
         <q-avatar style="width: 40px; height: 40px" class="q-mr-sm">
           <img :src="post.thumbnailImgPath"/>

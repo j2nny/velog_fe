@@ -43,8 +43,11 @@
 </template>
 
 <script setup>
-import {ref} from "vue";
+import {computed, onMounted, ref} from "vue";
 import Post from "components/Post.vue";
+import { usePostStore } from "../stores/post.js"
+
+const store = usePostStore();
 
 const tab = ref('trending')
 const period = ref('week')
@@ -65,11 +68,15 @@ const postColumns = [
   {name: 'regUserId', label:'등록사용자ID', field: 'regUserId'},
 ]
 
-const postRows = [
-  {postNo: 1, title: '제목', content: '내용', thumbnailImgPath: 'https://cdn.quasar.dev/img/chicken-salad.jpg', explnCntnt: '', regDttm: '2023. 08. 23', regUserId: 'jieun', like: 3},
-  {postNo: 2, title: 'fdsadfsadsadfsadfsadfdsfasdfasfasfsafsdafsdafasdfsdaffds', content: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', thumbnailImgPath: 'https://cdn.quasar.dev/img/parallax2.jpg', explnCntnt: '', regDttm: '2023. 08. 23', regUserId: 'jieun', like: 103},
-  {postNo: 3, title: 'fdsafds', content: 'fdafdsfasfd', thumbnailImgPath: 'https://cdn.quasar.dev/img/mountains.jpg', explnCntnt: '', regDttm: '2023. 08. 23', regUserId: 'jieun', like: 10},
-  {postNo: 4, title: 'fdsafds', content: 'fdafdsfasfd', thumbnailImgPath: 'https://cdn.quasar.dev/img/parallax1.jpg', explnCntnt: '', regDttm: '2023. 08. 23', regUserId: 'jieun', like: 201},
-  {postNo: 5, title: 'fdsafds', content: 'fdafdsfasfd', thumbnailImgPath: 'https://cdn.quasar.dev/img/chicken-salad.jpg', explnCntnt: '', regDttm: '2023. 08. 23', regUserId: 'jieun', like: 56},
-]
+const postRows = computed(() => {
+  return store.getPostList;
+})
+
+onMounted(() => {
+  store.FETCH_POST_LIST({
+    searchWord: null,
+    searchStartDate: 20230820,
+    searchEndDate: 20230824
+  });
+})
 </script>
