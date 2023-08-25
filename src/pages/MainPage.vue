@@ -31,6 +31,7 @@
             v-model="period"
             :options="periodOptions"
             map-options
+            @update:model-value = "handlePeriodChange"
           />
         </div>
       </template>
@@ -45,7 +46,8 @@
 <script setup>
 import {computed, onMounted, ref} from "vue";
 import Post from "components/Post.vue";
-import { usePostStore } from "../stores/post.js"
+import { usePostStore } from "stores/post"
+import { dayString } from "src/utils/fn_common";
 
 const store = usePostStore();
 
@@ -72,11 +74,36 @@ const postRows = computed(() => {
   return store.getPostList;
 })
 
+const makeSearchParams = (period) => {
+  let startDate = new Date();
+
+  switch (period){
+    case 'week':
+      startDate.setDate(startDate.getDate() - 6)
+      console.log(startDate)
+      break;
+    case 'month':
+      startDate.setMonth(startDate.getMonth() - 1)
+      break;
+    case 'year':
+      startDate.setFullYear(startDate.getFullYear() - 1)
+      break;
+  }
+
+  const endDate = new Date();
+  endDate.setDate(endDate.getDate() + 1)
+
+  return {
+    searchStartDate: dayString(startDate),
+    searchEndDate: dayString(endDate)
+  }
+}
+
+const handlePeriodChange = () => {
+  store.FETCH_POST_LIST(makeSearchParams(period.value.value));
+}
+
 onMounted(() => {
-  store.FETCH_POST_LIST({
-    searchWord: null,
-    searchStartDate: 20230820,
-    searchEndDate: 20230824
-  });
+  store.FETCH_POST_LIST(makeSearchParams(period.value));
 })
 </script>
