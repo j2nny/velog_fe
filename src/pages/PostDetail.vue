@@ -1,5 +1,6 @@
 <template>
-  <div style="height: 3000px; border: black solid 1px">detail</div>
+    <div style="height: 3000px; border: black solid 1px">detail</div>
 </template>
 
-<script setup></script>
+<script setup>
+</script>

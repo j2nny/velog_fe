@@ -1,8 +1,18 @@
 <template>
-    <div class="row justify-center">
-      <div v-if="browserSize >= 1300">left</div>
-      <router-view class="content-area"></router-view>
-      <div v-if="browserSize >= 1300">right</div>
+  <div class="column items-center">
+        <q-page-sticky
+          v-if="browserSize >= 1300"
+          position="left"
+          :offset="[200, 0]"
+          style="border: black solid 1px"
+        >left</q-page-sticky>
+        <router-view class="content-area"></router-view>
+        <q-page-sticky
+          v-if="browserSize >= 1300"
+          position="right"
+          :offset="[200, 0]"
+          style="border: black solid 1px"
+        >right</q-page-sticky>
     </div>
 </template>
 
@@ -14,22 +24,21 @@ const handleBrowserSize = () => {
   browserSize.value = window.innerWidth
 }
 
+const leftDrawerOpen = true
+
 onMounted(() => {
   window.addEventListener('resize', handleBrowserSize)
 })
 </script>
 
 <style scoped>
-  .content-area{
-    width: 1100px;
-  }
+.content-area{
+  width: 1000px;
+}
 
-  @media (max-width: 1100px) {
+@media (max-width: 1300px) {
+  .content-area{
     width: 100%;
   }
-
-  .fixed-area{
-    position: sticky;
-    top: 0;
-  }
+}
 </style>
