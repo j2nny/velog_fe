@@ -1,9 +1,10 @@
 import { defineStore } from 'pinia'
-import {fetchPostList} from "src/apis/post";
+import {fetchPost, fetchPostList} from "src/apis/post";
 
 export const usePostStore = defineStore('post', {
   state: () => ({
     postList: [],
+    post: ''
   }),
 
   getters: {
@@ -17,6 +18,15 @@ export const usePostStore = defineStore('post', {
       fetchPostList(params)
         .then((response) => {
           this.postList = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+    },
+    FETCH_POST(postNo) {
+      fetchPost(postNo)
+        .then((response) => {
+          this.post = response.data;
         })
         .catch((error) => {
           console.log(error);

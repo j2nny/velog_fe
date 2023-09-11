@@ -23,14 +23,8 @@
 <script setup>
 defineProps({
   post: {
-    postNo: Number,
-    title: String,
-    content: String,
-    thumbnailImgPath: String,
-    explnCntnt: String,
-    regDttm: String,
-    regUserId: String,
-    like: Number
+    type: Object,
+    required: true
   }
 })
 

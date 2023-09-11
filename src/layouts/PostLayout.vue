@@ -8,17 +8,27 @@
           <div class="column items-center">
             <q-btn round unelevated outline color="grey-5" icon="fa-solid fa-heart"></q-btn>
             <div class="">32</div>
-            <q-btn round unelevated outline color="grey-5" icon="fa-solid fa-share-nodes"></q-btn>
+            <q-btn round unelevated outline color="grey-5" icon="fa-solid fa-share-nodes" class="q-mt-sm"></q-btn>
           </div>
-
         </q-page-sticky>
-        <router-view class="content-area"></router-view>
+
+        <router-view
+          class="content-area"
+        ></router-view>
+
         <q-page-sticky
           v-if="browserSize >= 1300"
           position="right"
-          :offset="[200, 0]"
-          style="border: black solid 1px"
-        >right</q-page-sticky>
+          :offset="[50, 0]"
+        >
+          <div
+            style="border-left: lightgray solid 1px; width: 200px"
+            class="q-pa-sm"
+          >
+            제목<br>
+            소제목
+          </div>
+        </q-page-sticky>
     </div>
 </template>
 

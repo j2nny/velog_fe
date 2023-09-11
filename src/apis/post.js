@@ -13,4 +13,13 @@ function fetchPostList(params) {
   })
 }
 
-export { fetchPostList }
+function fetchPost(postNo) {
+  return Api.get({
+    url: '/api/v1/posts/'+postNo,
+    headers: {
+      'Content-type': 'application/json'
+    }
+  })
+}
+
+export { fetchPostList, fetchPost }
