@@ -13,7 +13,7 @@
         </q-page-sticky>
 
         <router-view
-          class="content-area"
+          class="post-area"
         ></router-view>
 
         <q-page-sticky
@@ -46,12 +46,12 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.content-area{
+.post-area{
   width: 1000px;
 }
 
 @media (max-width: 1300px) {
-  .content-area{
+  .post-area{
     width: 100%;
   }
 }
