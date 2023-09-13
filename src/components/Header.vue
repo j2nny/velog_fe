@@ -6,10 +6,17 @@
       <div>
         <q-btn round unelevated icon="fa-solid fa-sun" class="q-mx-xs"></q-btn>
         <q-btn round unelevated icon="search" class="q-mx-xs"></q-btn>
-        <q-btn rounded unelevated outline class="text-weight-bold q-mx-xs" style="line-height: 100%; border: 1px solid">새 글 작성</q-btn>
-        <q-btn-dropdown unelevated>
+        <q-btn
+          v-if="!userNo"
+          rounded unelevated color="black"
+          class="text-weight-bold q-mx-xs"
+          style="line-height: 100%; border: 1px solid"
+          @click="loginDialog = true"
+        >로그인</q-btn>
+        <q-btn v-if="userNo" rounded unelevated outline class="text-weight-bold q-mx-xs" style="line-height: 100%; border: 1px solid">새 글 작성</q-btn>
+        <q-btn-dropdown v-if="userNo" unelevated>
           <template v-slot:label>
-            <q-btn round unelevated icon="person"></q-btn>
+            <q-avatar round unelevated size="md" icon="person"></q-avatar>
           </template>
           <q-list>
             <q-item>내 벨로그</q-item>
@@ -21,15 +28,22 @@
         </q-btn-dropdown>
       </div>
   </q-header>
+
+  <q-dialog v-model="loginDialog"><Login/></q-dialog>
 </template>
 
 <script setup>
 import {onMounted, ref} from "vue";
+import Login from "components/Login.vue";
 
 const browserSize = ref(window.innerWidth)
 const handleBrowserSize = () => {
   browserSize.value = window.innerWidth
 }
+
+const loginDialog = ref(false)
+
+const userNo = localStorage.getItem('velog-userNo')
 
 onMounted(() => {
   window.addEventListener('resize', handleBrowserSize)
