@@ -19,11 +19,11 @@
             <q-avatar round unelevated size="md" icon="person"></q-avatar>
           </template>
           <q-list>
-            <q-item>내 벨로그</q-item>
-            <q-item>임시 글</q-item>
-            <q-item>읽기 목록</q-item>
-            <q-item>설정</q-item>
-            <q-item>로그아웃</q-item>
+            <q-item clickable><q-item-section><q-item-label>내 벨로그</q-item-label></q-item-section></q-item>
+            <q-item clickable><q-item-section><q-item-label>임시 글</q-item-label></q-item-section></q-item>
+            <q-item clickable><q-item-section><q-item-label>읽기 목록</q-item-label></q-item-section></q-item>
+            <q-item clickable><q-item-section><q-item-label>설정</q-item-label></q-item-section></q-item>
+            <q-item clickable @click="logout"><q-item-section><q-item-label>로그아웃</q-item-label></q-item-section></q-item>
           </q-list>
         </q-btn-dropdown>
       </div>
@@ -35,6 +35,9 @@
 <script setup>
 import {onMounted, ref} from "vue";
 import Login from "components/Login.vue";
+import {useQuasar} from "quasar";
+
+const $q = useQuasar()
 
 const browserSize = ref(window.innerWidth)
 const handleBrowserSize = () => {
@@ -44,6 +47,16 @@ const handleBrowserSize = () => {
 const loginDialog = ref(false)
 
 const isLogin = ref(localStorage.getItem('velog-userNo') != null)
+
+const logout = () => {
+  isLogin.value = false;
+  localStorage.clear()
+  $q.notify({
+    message: "로그아웃 되었습니다.",
+    color: "teal-5",
+    timeout: 500
+  })
+}
 
 onMounted(() => {
   window.addEventListener('resize', handleBrowserSize)
