@@ -1,5 +1,5 @@
 <template>
-  <q-card class="post-card q-ma-sm cursor-pointer" @click="$router.push('/'+post.regUserId+'/'+post.postNo)">
+  <q-card class="post-card q-ma-md cursor-pointer" @click="$router.push('/'+post.regUserId+'/'+post.postNo)">
     <q-img :src="post.thumbnailImgPath" class="thumbnail-img"></q-img>
 
     <q-card-section class="column q-pb-none" style="height: 200px">

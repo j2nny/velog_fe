@@ -80,7 +80,6 @@ const makeSearchParams = (period) => {
   switch (period){
     case 'week':
       startDate.setDate(startDate.getDate() - 6)
-      console.log(startDate)
       break;
     case 'month':
       startDate.setMonth(startDate.getMonth() - 1)
