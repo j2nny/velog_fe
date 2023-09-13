@@ -7,14 +7,14 @@
         <q-btn round unelevated icon="fa-solid fa-sun" class="q-mx-xs"></q-btn>
         <q-btn round unelevated icon="search" class="q-mx-xs"></q-btn>
         <q-btn
-          v-if="!userNo"
+          v-if="!isLogin"
           rounded unelevated color="black"
           class="text-weight-bold q-mx-xs"
           style="line-height: 100%; border: 1px solid"
           @click="loginDialog = true"
         >로그인</q-btn>
-        <q-btn v-if="userNo" rounded unelevated outline class="text-weight-bold q-mx-xs" style="line-height: 100%; border: 1px solid">새 글 작성</q-btn>
-        <q-btn-dropdown v-if="userNo" unelevated>
+        <q-btn v-if="isLogin" rounded unelevated outline class="text-weight-bold q-mx-xs" style="line-height: 100%; border: 1px solid">새 글 작성</q-btn>
+        <q-btn-dropdown v-if="isLogin" unelevated>
           <template v-slot:label>
             <q-avatar round unelevated size="md" icon="person"></q-avatar>
           </template>
@@ -29,7 +29,7 @@
       </div>
   </q-header>
 
-  <q-dialog v-model="loginDialog"><Login/></q-dialog>
+  <q-dialog v-model="loginDialog"><Login @closeDialog="loginDialog = false" @isLogin="isLogin = true"></Login></q-dialog>
 </template>
 
 <script setup>
@@ -43,7 +43,7 @@ const handleBrowserSize = () => {
 
 const loginDialog = ref(false)
 
-const userNo = localStorage.getItem('velog-userNo')
+const isLogin = ref(localStorage.getItem('velog-userNo') != null)
 
 onMounted(() => {
   window.addEventListener('resize', handleBrowserSize)

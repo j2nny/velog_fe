@@ -4,20 +4,20 @@
       <q-card-section>
         <p class="text-body1 text-bold text-grey-6">이메일로 로그인</p>
         <q-input
-          type="text"
+          type="email"
           outlined dense
           class="q-my-sm"
           color="teal-5"
           placeholder="이메일을 입력하세요."
-          v-model="user.id"
+          v-model="user.email"
         ></q-input>
         <q-input
-          type="text"
+          type="password"
           outlined dense
           class="q-my-sm"
           color="teal-5"
           placeholder="비밀번호를 입력하세요."
-          v-model="user.pw"
+          v-model="user.pwd"
         ></q-input>
         <div class="row justify-center">
           <q-btn
@@ -40,13 +40,40 @@
 
 <script setup>
 import {ref} from "vue";
+import { useUserStore } from "stores/user";
+import {useRouter} from "vue-router";
+import {useQuasar} from "quasar";
+
+const userStore = useUserStore();
+const router = useRouter()
+const $q = useQuasar()
 
 const user = ref({
-  id: null,
-  pw: null,
+  email: null,
+  pwd: null,
 })
 
+const emits = defineEmits(['closeDialog', 'isLogin'])
+
 const login = () => {
-  console.log(user)
+  userStore.FETCH_LOGIN(user.value).then( () => {
+    if(userStore.getLoginResponse.message === 'valid') {
+      $q.notify({
+        message: "로그인 되었습니다.",
+        color: "teal-5",
+        timeout: 500
+      })
+      emits('closeDialog')
+      emits('isLogin')
+      router.push({name: 'main'})
+    } else {
+      $q.notify({
+        message: "이메일과 비밀번호를 확인해주세요.",
+        color: "red-8",
+        timeout: 500
+      })
+    }
+    }
+  )
 }
 </script>
